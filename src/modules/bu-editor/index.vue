@@ -1,5 +1,5 @@
 <template>
-  <div class="section markdown-editor">
+  <div class="bu-editor">
     <vue-monaco-editor
       v-model:value="store.editorContent"
       :theme="store.theme"
@@ -19,7 +19,8 @@ console.log(store.monacoEditorOptions);
 </script>
 
 <style lang="scss" scoped>
-.markdown-editor {
-  flex: 1;
+.bu-editor {
+  height: 100%;
+  width: 100%;
 }
 </style>

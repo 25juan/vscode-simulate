@@ -20,7 +20,7 @@ export const useEditorConfigStore = defineStore<
 >("editorConfigStore", {
   state() {
     return {
-      theme: "light",
+      theme: "vs-dark",
       language: "typescript",
       monacoEditorOptions: {
         automaticLayout: true,
@@ -35,11 +35,24 @@ export const useEditorConfigStore = defineStore<
         },
       },
       editorRef: null,
-      editorContent: "// some code...",
+      editorContent: `const obj = {
+        a: 1
+      }
+
+      async function  sayHello() {
+        return Promise.resolve(1)
+      }
+      (async () => {
+        const result = await sayHello()
+        console.log(result)
+      })()
+      `,
     };
   },
   actions: {
-    formatCode() {},
+    formatCode() {
+      this.editorRef?.getAction("editor.action.formatDocument")?.run();
+    },
     changeFontSize(fontSize) {
       if (fontSize) {
         this.monacoEditorOptions.fontSize = fontSize;
@@ -50,6 +63,7 @@ export const useEditorConfigStore = defineStore<
     },
     setEditorRef(editorRef: monacoEditor.editor.IStandaloneCodeEditor) {
       this.editorRef = editorRef;
+      setTimeout(this.formatCode, 500);
     },
   },
 });

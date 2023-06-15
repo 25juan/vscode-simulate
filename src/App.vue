@@ -1,18 +1,8 @@
 <template>
-  <div class="app">
-    <!-- 
-    <FileMenu />
-    <MarkdownEditor />
-    <MarkdownPreview /> -->
-    <TopBar />
-    <MarkdownEditor />
-  </div>
+  <layout />
 </template>
 <script setup lang="ts">
-import TopBar from "@/components/top-bar/index.vue";
-import FileMenu from "@/modules/file-menu/index.vue";
-import MarkdownEditor from "@/modules/markdown-editor/index.vue";
-import MarkdownPreview from "@/modules/markdown-preview/index.vue";
+import Layout from "@/layout/index.vue";
 </script>
 
 <style scoped lang="scss">

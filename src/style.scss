@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --side-bar-bg: #161821;
+  --side-bar-color: #aaa;
+  --side-bar-hover-color: #eee;
+
+  --top-bar-bg: #1e1f2b;
+  --top-bar-color: #aaa;
+  --top-bar-hover-color: #31323b;
+
+  --work-space-bg: #1e1f2b;
+  --work-space-color: #aaa;
+  --work-space-hover-color: #eee;
+
+  --editor-bg: #282a3a;
+  --editor-color: #aaa;
+  --editor-hover-color: #eee;
+}
+@font-face {
+  font-family: codicon;
+  src: url("./assets/font/codicon.ttf");
+}
+.x-icon {
+  font-family: codicon;
+  font-size: 24px;
+  text-align: center;
+  color: #aaa;
+  &:hover {
+    color: #eee;
+  }
+}
+
+.x-icon-list::after {
+  content: "\eb94";
+}
+
+.x-icon-file::after {
+  content: "\eaf0";
+}
+
+.x-icon-search::after {
+  content: "\ea6d";
+}
+
+.x-icon-git::after {
+  content: "\ea68";
+}
+
+.x-icon-debug::after {
+  content: "\eb91";
+}
+
+.x-icon-plugin::after {
+  content: "\eae6";
+}
+
+.x-icon-user::after {
+  content: "\eb99";
+}
+
+.x-icon-setting::after {
+  content: "\eb51";
+}

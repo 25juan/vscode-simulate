@@ -1,15 +1,19 @@
 <template>
   <div class="top-bar">
     <div class="top-bar__menu">
-      文件(F)
-      <ul class="top-bar__menu-sub">
+      <span>文件(F)</span>
+      <!-- <ul class="top-bar__menu-sub">
         <li>新建文本文件</li>
         <li>新建文件</li>
         <li>打开工作空间</li>
-      </ul>
+      </ul> -->
     </div>
-    <div class="top-bar__menu">编辑(E)</div>
-    <div class="top-bar__menu">选择(S)</div>
+    <div class="top-bar__menu">
+      <span>编辑(E)</span>
+    </div>
+    <div class="top-bar__menu">
+      <span>选择(S)</span>
+    </div>
   </div>
 </template>
 <script setup lang="ts"></script>
@@ -24,20 +28,19 @@ $menu-height: 40px;
   flex-direction: row;
   justify-content: flex-start;
   font-size: 14px;
-  color: #333;
+  background-color: var(--top-bar-bg);
+  color: var(--top-bar-color);
   &__menu {
-    padding: 0 12px;
+    padding: 0 6px;
     line-height: $menu-height;
     position: relative;
-    &::before {
-      content: " ";
-      position: absolute;
-      height: 70%;
-      width: 90%;
-      left: 5%;
-      top: 15%;
-      background-color: #fff;
-      z-index: -1;
+    & > span {
+      display: inline-block;
+      position: relative;
+      padding: 4px 6px;
+      line-height: 1;
+      background-color: transparent;
+      z-index: 1;
       border-radius: 6px;
       transition: background 0.3s;
     }
@@ -47,25 +50,24 @@ $menu-height: 40px;
         display: block;
       }
     }
-    &:hover::before,
-    .active {
-      background-color: #eee;
+    &:hover > span {
+      background-color: var(--top-bar-hover-color);
     }
-    &-sub {
-      border: solid 1px #ddd;
-      background-color: #fff;
-      display: none;
-      position: fixed;
-      bottom: 0;
-      list-style: none;
-      z-index: 2;
-      top: $menu-height;
-      & > li {
-        height: 40px;
-        padding: 0 20px;
-        line-height: 40px;
-      }
-    }
+    // &-sub {
+    //   border: solid 1px #ddd;
+    //   background-color: #fff;
+    //   display: none;
+    //   position: fixed;
+    //   bottom: 0;
+    //   list-style: none;
+    //   z-index: 2;
+    //   top: $menu-height;
+    //   & > li {
+    //     height: 40px;
+    //     padding: 0 20px;
+    //     line-height: 40px;
+    //   }
+    // }
   }
 }
 </style>
