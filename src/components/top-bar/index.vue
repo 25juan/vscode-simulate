@@ -1,22 +1,53 @@
 <template>
   <div class="top-bar">
-    <div class="top-bar__menu">
-      <span>文件(F)</span>
-      <!-- <ul class="top-bar__menu-sub">
-        <li>新建文本文件</li>
-        <li>新建文件</li>
-        <li>打开工作空间</li>
-      </ul> -->
+    <div
+      v-for="(m, idx) in menu"
+      :key="idx"
+      class="top-bar__menu"
+      @click="handleMenuClick(m,idx,$event)"
+    >
+      <span>{{ m.title }}</span>
     </div>
-    <div class="top-bar__menu">
-      <span>编辑(E)</span>
+    <div v-if="subMenuInfo.show" :style="subMenuInfo.style" class="top-bar__sub">
+      <div
+      v-for="(m, idx) in menu[subMenuInfo.selectIndex]?.children || []"
+      :key="idx"
+      class="top-bar__sub-menu select-none"
+      @click="handleSubMenuClick(m)"
+    >
+      <span class="top-bar__sub-title">{{ m.title }}</span>
+      <span class="top-bar__sub-key">{{m.shortKey}}</span>
     </div>
-    <div class="top-bar__menu">
-      <span>选择(S)</span>
     </div>
   </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineEmits(["click"]);
+const props = defineProps<{ menu: Array<ITopMenu> }>();
+const subMenuInfo = reactive({
+    show: false,
+    selectIndex: 0,
+    style: {
+      left: 0,
+      top: 0
+    }
+});
+const handleMenuClick = (menu: ITopMenu, idx: number, event) => {
+  const rect = event.target.getBoundingClientRect()
+  subMenuInfo.style.left = rect.left + 'px'
+  subMenuInfo.style.top = rect.bottom + 10 + 'px'
+  if(subMenuInfo.selectIndex === idx) {
+    subMenuInfo.show = !subMenuInfo.show
+  }else {
+    subMenuInfo.show = true
+  }
+  subMenuInfo.selectIndex = idx;
+};
+const handleSubMenuClick = (m)=>{
+  subMenuInfo.show = false
+  console.log(m)
+}
+</script>
 
 <style scoped lang="scss">
 $menu-height: 40px;
@@ -46,28 +77,41 @@ $menu-height: 40px;
     }
     &:hover {
       cursor: default;
-      .top-bar__menu-sub {
-        display: block;
-      }
     }
     &:hover > span {
       background-color: var(--top-bar-hover-color);
     }
-    // &-sub {
-    //   border: solid 1px #ddd;
-    //   background-color: #fff;
-    //   display: none;
-    //   position: fixed;
-    //   bottom: 0;
-    //   list-style: none;
-    //   z-index: 2;
-    //   top: $menu-height;
-    //   & > li {
-    //     height: 40px;
-    //     padding: 0 20px;
-    //     line-height: 40px;
-    //   }
-    // }
   }
+  &__sub {
+      border: solid 1px var(--editor-bg);
+      display: block;
+      position: fixed;
+      list-style: none;
+      z-index: 2;
+      box-show: 2px 2px 6px #000;
+      cursor: default;
+      background-color: var(--editor-bg);
+      border-radius: 8px;
+      &-menu {
+        padding: 0 16px;
+        line-height: 40px;
+        font-size:14px;
+        color: var(--editor-color);
+        display: flex;
+        flex-direction: row;
+        &:hover {
+          background-color: var(--editor-hover-color);
+        }
+      }
+      &-title {
+        display: inline-block;
+        padding-right: 40px;
+      }
+      &-key {
+        flex: 1;
+        text-align: right;
+      }
+      
+    }
 }
 </style>
