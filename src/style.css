@@ -3,3 +3,8 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+@font-face {
+  font-family: codicon;
+  src: url('./assets/font/codicon.ttf');
+}
